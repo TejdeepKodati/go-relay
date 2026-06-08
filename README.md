@@ -148,7 +148,7 @@ GoRelay/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/TejdeepKodati/gorelay.git
+git clone https://github.com/TejdeepKodati/go-relay.git
 cd gorelay
 ```
 
@@ -296,19 +296,22 @@ Provides:
 
 ### Dashboard / API Testing
 
-![Create App](screenshots/create_app.png)
+![Create App](screenshots/create_application.png)
 
 ### Event Ingestion
 
 ![Event Ingestion](screenshots/event_ingestion.png)
 
+### End Point
+
+![Event end point](screenshots/event_endpoint.png)
 ### Webhook Delivery
 
 ![Webhook Delivery](screenshots/webhook_delivery.png)
 
-### Metrics
+### Health check
 
-![Metrics](screenshots/metrics.png)
+![Health](screenshots/health_check.png)
 
 ---
 

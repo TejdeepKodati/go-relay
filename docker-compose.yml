@@ -1,0 +1,58 @@
+
+version: "3.9"
+
+services:
+  api:
+    build: .
+    ports:
+      - "8090:8090"
+    environment:
+      ENV: development
+      PORT: 8090
+      DATABASE_URL: postgres://postgres:postgres@db:5432/gorelay?sslmode=disable
+      REDIS_URL: redis://redis:6379
+      WORKER_COUNT: 10
+      MAX_RETRIES: 3
+      HTTP_TIMEOUT_SEC: 30
+      QUEUE_NAME: gorelay:delivery_queue
+      DLQ_NAME: gorelay:dead_letter_queue
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gorelay
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./migrations/001_initial.sql:/docker-entrypoint-initdb.d/001_initial.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "5433:5432"
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "6380:6379"
+
+volumes:
+  pgdata:
+  redisdata:

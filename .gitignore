@@ -1,0 +1,22 @@
+# Environment
+.env
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build output
+gorelay
+
+# IDE
+.vscode/
+
+# Docker volumes
+pgdata/
+redisdata/
+
+# OS
+.DS_Store

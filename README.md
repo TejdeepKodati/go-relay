@@ -304,7 +304,7 @@ Provides:
 
 ### End Point
 
-![Event end point](screenshots/event_endpoint.png)
+![Event end point](screenshots/create_endpoint.png)
 ### Webhook Delivery
 
 ![Webhook Delivery](screenshots/webhook_delivery.png)
